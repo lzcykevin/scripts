@@ -355,9 +355,11 @@ install_iptables_haProxy(){
 	else
 		apt-get update && apt-get install -y vim haproxy
 	fi
+	
 	if [[ -f /etc/rc.local ]]; then
-		chmod +x /etc/rc.local
+	  chmod +x /etc/rc.local
 	fi
+	
 	HaProxy_exist=`haproxy -v`
 	if [[ ${HaProxy_exist} = "" ]]; then
 		echo -e "\033[41;37m [错误] \033[0m 安装HaProxy失败，请检查 !" && exit 1
