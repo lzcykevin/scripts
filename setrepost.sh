@@ -38,6 +38,8 @@ install_bbr(){
 		fi
 		
 		if [[ ${dversion} == 9 ]]; then
+			apt -y update
+			apt -y upgrade
 			echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 			echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 			sysctl -p
