@@ -31,9 +31,10 @@ check_sys(){
 # 安装bbr
 install_bbr(){
 	if [[ ${release}  == "debian" ]]; then
-		if [[ cat /etc/issue | grep -q -E -i "9" ]]; then
+		  dversion=8
+		if cat /etc/issue | grep -q -E -i "9"; then
 			dversion=9
-		elif cat /proc/version | grep -q -E -i "debian"; then
+		elif cat /proc/version | grep -q -E -i "9"; then
 			dversion=9
 		fi
 		
@@ -424,7 +425,7 @@ echo && echo -e "端口转发一键管理脚本
 5 安装BBR 目前只支持DEBIAN 9
 ————————————
 "&& echo
-stty erase '^H' && read -p " 请输入数字 [1-4]:" num
+stty erase '^H' && read -p " 请输入数字 [1-5]:" num
 case "$num" in
 	1)
 	install_iptables_haProxy
@@ -442,6 +443,6 @@ case "$num" in
 	install_bbr
 	;;
 	*)
-	echo "请输入正确数字 [1-4]"
+	echo "请输入正确数字 [1-5]"
 	;;
 esac
