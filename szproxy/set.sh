@@ -1,6 +1,6 @@
 # get scripts 
 wget http://update.aegis.aliyun.com/download/uninstall.sh && chmod +x uninstall.sh && bash uninstall.sh
-wget -N --no-check-certificate https://raw.githubusercontent.com/lzcykevin/setrepost/master/bashrc
+wget -N --no-check-certificate https://raw.githubusercontent.com/lzcykevin/setrepost/master/bashrc/bashrc
 wget -N --no-check-certificate https://softs.loan/Bash/haproxy.sh && chmod +x haproxy.sh
 wget -N --no-check-certificate https://softs.loan/Bash/iptables-pf.sh && chmod +x iptables-pf.sh
 
