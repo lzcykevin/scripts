@@ -339,9 +339,15 @@ install_iptables_haProxy(){
 		fi
 	fi
 	echo -e "${Info} 开始配置 iptables !"
+	echo -e "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+	sysctl -p
 	Set_iptables
-	echo -e "${Info} iptables 配置完毕 !"
 	
+	echo -e "=============================================="
+	echo -e "${Info} iptables 配置完毕 !"
+	echo -e "=============================================="
+	read -p "请按任意键继续，如有配置错误请使用 Ctrl+C 退出。" var
+
 	echo -e "=============================================="
 	echo -e "==============install haProxy================="
 	echo -e "=============================================="
