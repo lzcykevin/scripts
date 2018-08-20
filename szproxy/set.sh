@@ -1,8 +1,9 @@
 # get scripts 
 wget http://update.aegis.aliyun.com/download/uninstall.sh && chmod +x uninstall.sh && bash uninstall.sh
 wget -N --no-check-certificate https://raw.githubusercontent.com/lzcykevin/setrepost/master/bashrc/bashrc
-wget -N --no-check-certificate https://softs.loan/Bash/haproxy.sh && chmod +x haproxy.sh
-wget -N --no-check-certificate https://softs.loan/Bash/iptables-pf.sh && chmod +x iptables-pf.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/lzcykevin/scripts/master/szproxy/setran.sh
+#wget -N --no-check-certificate https://softs.loan/Bash/haproxy.sh && chmod +x haproxy.sh
+#wget -N --no-check-certificate https://softs.loan/Bash/iptables-pf.sh && chmod +x iptables-pf.sh
 
 # update and install tools
 apt -y update
@@ -23,3 +24,6 @@ rm -rf .bashrc && mv bashrc .bashrc && source .bashrc
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
+
+# bash script
+chmod +x setran.sh && bash setran.sh
