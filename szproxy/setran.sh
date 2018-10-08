@@ -52,28 +52,28 @@ install_bbr(){
 }
 # 设置转发
 Set_forwarding_port(){
-	stty erase '^H' && read -p "请输入 iptables 欲转发至的 远程端口 [1-65535] (支持端口段 如 2333-6666, 被转发服务器):" forwarding_port
+	read -e -p "请输入 iptables 欲转发至的 远程端口 [1-65535] (支持端口段 如 2333-6666, 被转发服务器):" forwarding_port
 	[[ -z "${forwarding_port}" ]] && echo "取消..." && exit 1
 	echo && echo -e "	欲转发端口 : ${Red_font_prefix}${forwarding_port}${Font_color_suffix}" && echo
 }
 Set_forwarding_ip(){
-		stty erase '^H' && read -p "请输入 iptables 欲转发至的 远程IP(被转发服务器):" forwarding_ip
+		read -e -p "请输入 iptables 欲转发至的 远程IP(被转发服务器):" forwarding_ip
 		[[ -z "${forwarding_ip}" ]] && echo "取消..." && exit 1
 		echo && echo -e "	欲转发服务器IP : ${Red_font_prefix}${forwarding_ip}${Font_color_suffix}" && echo
 }
 Set_local_port(){
 	echo -e "请输入 iptables 本地监听端口 [1-65535] (支持端口段 如 2333-6666)"
-	stty erase '^H' && read -p "(默认端口: ${forwarding_port}):" local_port
+	read -e -p "(默认端口: ${forwarding_port}):" local_port
 	[[ -z "${local_port}" ]] && local_port="${forwarding_port}"
 	echo && echo -e "	本地监听端口 : ${Red_font_prefix}${local_port}${Font_color_suffix}" && echo
 }
 Set_local_ip(){
-	stty erase '^H' && read -p "请输入 本服务器的 网卡IP(注意是网卡绑定的IP，而不仅仅是公网IP，回车自动检测外网IP):" local_ip
+	read -e -p "请输入 本服务器的 网卡IP(注意是网卡绑定的IP，而不仅仅是公网IP，回车自动检测外网IP):" local_ip
 	if [[ -z "${local_ip}" ]]; then
 		local_ip=$(wget -qO- -t1 -T2 ipinfo.io/ip)
 		if [[ -z "${local_ip}" ]]; then
 			echo "${Error} 无法检测到本服务器的公网IP，请手动输入"
-			stty erase '^H' && read -p "请输入 本服务器的 网卡IP(注意是网卡绑定的IP，而不仅仅是公网IP):" local_ip
+			read -e -p "请输入 本服务器的 网卡IP(注意是网卡绑定的IP，而不仅仅是公网IP):" local_ip
 			[[ -z "${local_ip}" ]] && echo "取消..." && exit 1
 		fi
 	fi
@@ -92,7 +92,7 @@ Set_Config(){
 	欲转发的端口    : ${Green_font_prefix}${forwarding_port}${Font_color_suffix}
 	转发类型\t: ${Green_font_prefix}${forwarding_type}${Font_color_suffix}
 ——————————————————————————————\n"
-	stty erase '^H' && read -p "请按任意键继续，如有配置错误请使用 Ctrl+C 退出。" var
+	read -e -p "请按任意键继续，如有配置错误请使用 Ctrl+C 退出。" var
 }
 
 # 查看HaProxy列表
@@ -207,7 +207,7 @@ Add_forwarding(){
 	echo -e "	欲转发 IP : \033[41;37m ${forwarding_ip} \033[0m"
 	echo "——————————————————————————————"
 	echo
-	stty erase '^H' && read -p "请按任意键继续，如有配置错误请使用 Ctrl+C 退出。" var
+	read -e -p "请按任意键继续，如有配置错误请使用 Ctrl+C 退出。" var
 	HaProxy_port_1=`cat ${HaProxy_cfg_file} | sed -n "12p" | cut -c 12-23 | grep "-"`
 	HaProxy_port=`cat ${HaProxy_cfg_file} | sed -n "12p" | cut -c 12-23`
 	if [[ ${HaProxy_port_1} = "" ]]; then
@@ -294,7 +294,7 @@ Set_iptables(){
 Uninstall_forwarding_haProxy(){
 	check_iptables
 	echo -e "确定要清空 iptables 所有端口转发规则 ? [y/N]"
-	stty erase '^H' && read -p "(默认: n):" unyn
+	read -e -p "(默认: n):" unyn
 	[[ -z ${unyn} ]] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
 		forwarding_text=$(iptables -t nat -vnL PREROUTING|tail -n +3)
@@ -435,7 +435,7 @@ echo && echo -e "端口转发一键管理脚本
 5 安装BBR 目前只支持DEBIAN 9
 ————————————
 "&& echo
-stty erase '^H' && read -p " 请输入数字 [1-5]:" num
+read -e -p " 请输入数字 [1-5]:" num
 case "$num" in
 	1)
 	install_iptables_haProxy
