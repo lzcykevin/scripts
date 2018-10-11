@@ -1,6 +1,6 @@
 apt -y update
 apt -y upgrade
-apt -y install net-tools nload dstat htop screen git gcc 
+apt -y install net-tools nload dstat vnstat htop screen git gcc 
 
 
 # open bbr
