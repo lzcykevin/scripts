@@ -1,7 +1,7 @@
 ###########################################################################
-apt -y update
-apt -y upgrade
-apt -y install net-tools nload dstat vnstat htop screen git gcc pigz
+apt update -y
+apt upgrade -y
+apt install net-tools nload dstat vnstat htop screen git gcc pigz -y
 
 ###########################################################################
 # Set sysctl.conf 
